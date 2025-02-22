@@ -11,6 +11,8 @@ const MyCampaigns = () => {
       description: 'Training the next generation of blockchain developers',
       goal: 80,
       raised: 45,
+      status: 'ongoing', // or 'completed'
+
       image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80',
     },
     // Add more user campaigns as needed

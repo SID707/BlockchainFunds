@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Users, Calendar, Target, Wallet, Clock, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Users, Calendar, Target, Wallet, Clock, ArrowUpRight, ArrowDownRight, Pencil } from 'lucide-react';
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -15,6 +15,7 @@ const CampaignDetails = () => {
     raised: 65,
     backers: 128,
     daysLeft: 15,
+    status: 'ongoing', // or 'completed'
     creator: '0x1234...5678',
     image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80',
     fundingHistory: [
@@ -160,7 +161,7 @@ const CampaignDetails = () => {
               </div>
               <div className="h-2 bg-gray-700 rounded-full">
                 <div
-                  className="h-full bg-primary-500 rounded-full transition-all duration-300"
+                  className="h-full bg-primary-500 rounded-full transition-all duration-600"
                   style={{ width: `${(campaign.raised / campaign.goal) * 100}%` }}
                 />
               </div>
@@ -206,9 +207,37 @@ const CampaignDetails = () => {
           </div>
 
           <div className="card">
-            <h3 className="text-lg font-semibold mb-2">Created by</h3>
-            <p className="text-gray-400">{campaign.creator}</p>
-          </div>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold">Created by</h3>
+        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+          campaign.status === 'ongoing' 
+            ? 'bg-green-500/20 text-green-500' 
+            : 'bg-blue-500/20 text-blue-500'
+        }`}>
+          {campaign.status === 'ongoing' ? 'Ongoing' : 'Completed'}
+        </span>
+      </div>
+      
+      <p className="text-gray-400 mb-4">{campaign.creator}</p>
+      
+      <div className="grid grid-cols-2 gap-4">
+        <button 
+          className="btn-primary flex items-center justify-center gap-2"
+          onClick={() => console.log('Edit campaign')}
+        >
+          <Pencil className="w-4 h-4" />
+          Edit
+        </button>
+        
+        <button 
+          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+          onClick={() => console.log('Withdraw funds')}
+        >
+          <Wallet className="w-4 h-4" />
+          Withdraw
+        </button>
+      </div>
+    </div>
         </div>
       </motion.div>
     </div>
