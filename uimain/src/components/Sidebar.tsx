@@ -12,37 +12,43 @@ import {
 const Sidebar = () => {
   return (
     <motion.aside 
-      className="w-64 bg-gray-900 p-4 border-r border-gray-800"
+      className="fixed top-0 left-0 h-screen w-64 bg-gray-900 p-4 border-r border-gray-800 flex flex-col justify-between overflow-y-auto"
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex items-center gap-3 mb-8 px-4">
-        <Blocks className="w-8 h-8 text-primary-500" />
-        <h1 className="text-xl font-bold text-white">FusionFunds</h1>
+      <div>
+        <div className="flex items-center gap-3 mb-8 px-4">
+          <Blocks className="w-8 h-8 text-primary-500" />
+          <h1 className="text-xl font-bold text-white">CryptoFund</h1>
+        </div>
+        
+        <nav className="space-y-2">
+          <NavLink to="/dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <LayoutDashboard className="w-5 h-5" />
+            Campaigns
+          </NavLink>
+          
+          <NavLink to="/transactions" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <History className="w-5 h-5" />
+            Transaction History
+          </NavLink>
+          
+          <NavLink to="/my-campaigns" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Megaphone className="w-5 h-5" />
+            My Campaigns
+          </NavLink>
+          
+          <NavLink to="/rewards" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Gift className="w-5 h-5" />
+            Rewards
+          </NavLink>
+        </nav>
       </div>
       
-      <nav className="space-y-2">
-        <NavLink to="/dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-          <LayoutDashboard className="w-5 h-5" />
-          Campaigns
-        </NavLink>
-        
-        <NavLink to="/transactions" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-          <History className="w-5 h-5" />
-          Transaction History
-        </NavLink>
-        
-        <NavLink to="/my-campaigns" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-          <Megaphone className="w-5 h-5" />
-          My Campaigns
-        </NavLink>
-        
-        <NavLink to="/rewards" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-          <Gift className="w-5 h-5" />
-          Rewards
-        </NavLink>
-      </nav>
+      <button className="bg-purple-500 text-white px-4 py-2 mb-3 rounded mt-8 text-lg">
+        Connect Wallet
+      </button>
     </motion.aside>
   );
 };

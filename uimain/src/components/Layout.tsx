@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="flex min-h-screen">
       {!isLandingPage && <Sidebar />}
       <motion.main 
-        className={`flex-1 ${!isLandingPage ? 'p-8' : 'p-0'}`}
+        className={`flex-1 ${!isLandingPage ? 'ml-64 p-8' : 'p-0'}`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -27,5 +27,4 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     </div>
   );
 };
-
 export default Layout;
