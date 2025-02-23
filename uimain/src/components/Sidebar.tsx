@@ -19,7 +19,7 @@ const Sidebar = () => {
     >
       <div className="flex items-center gap-3 mb-8 px-4">
         <Blocks className="w-8 h-8 text-primary-500" />
-        <h1 className="text-xl font-bold text-white">CryptoFund</h1>
+        <h1 className="text-xl font-bold text-white">FusionFunds</h1>
       </div>
       
       <nav className="space-y-2">

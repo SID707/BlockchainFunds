@@ -51,7 +51,7 @@ const Dashboard = () => {
       
       >
         <div>
-          <h1 className="text-3xl font-bold mb-2">Welcome to CryptoFund</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome to FusionFunds</h1>
           <p className="text-gray-400">Discover and support innovative blockchain projects</p>
         </div>
         <button className="bg-purple-500 text-white px-4 py-2 rounded">Connect Wallet</button>
