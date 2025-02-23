@@ -46,7 +46,7 @@ function Landing() {
             transition={{ duration: 1.4 }}
           >
             <Coins className="w-8 h-8 text-purple-400" />
-            <span className="text-2xl font-bold">CryptoFund</span>
+            <span className="text-2xl font-bold">FusionFunds</span>
           </motion.div>
           <motion.div 
   className="flex space-x-8 items-center"
