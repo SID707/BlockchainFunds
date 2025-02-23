@@ -23,7 +23,7 @@ const Sidebar = () => {
       </div>
       
       <nav className="space-y-2">
-        <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+        <NavLink to="/dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <LayoutDashboard className="w-5 h-5" />
           Dashboard
         </NavLink>

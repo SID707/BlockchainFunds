@@ -2,9 +2,13 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Calendar, Target, Wallet, Clock, ArrowUpRight, ArrowDownRight, Pencil } from 'lucide-react';
+import { File, Check, X } from 'lucide-react';
+import { useState } from 'react';
 
 const CampaignDetails = () => {
   const { id } = useParams();
+
+  const [votingStatus, setVotingStatus] = useState<{ [key: string]: 'approved' | 'declined' | undefined }>({});
 
   // Mock data - replace with actual campaign details
   const campaign = {
@@ -21,9 +25,12 @@ const CampaignDetails = () => {
     fundingHistory: [
       {
         id: '1',
-        address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
-        amount: '5.5 ETH',
-        timestamp: '2024-03-15 14:30:45',
+        timestamp: '2024-03-16 10:20:15',
+        amount: '3.2 ETH',
+        recipient: '0x8F3a54D092Ad2C4D6729c4B7E73189C34E12F14B',
+        reason: 'Platform development - Smart contract implementation',
+        approvalStatus: null, // can be null, 'approved', or 'declined'
+
       },
       {
         id: '2',
@@ -45,6 +52,12 @@ const CampaignDetails = () => {
         amount: '3.2 ETH',
         recipient: '0x8F3a54D092Ad2C4D6729c4B7E73189C34E12F14B',
         reason: 'Platform development - Smart contract implementation',
+        documentUrl: 'https://example.com/doc1.pdf',
+
+        votes: {
+          approved: 0,
+          declined: 0
+        }
       },
       {
         id: '2',
@@ -52,6 +65,12 @@ const CampaignDetails = () => {
         amount: '2.5 ETH',
         recipient: '0x5E2d35Cc6634C0532925a3b844Bc454e4438f44f',
         reason: 'UI/UX design and frontend development',
+        documentUrl: 'https://example.com/doc1.pdf',
+
+        votes: {
+          approved: 0,
+          declined: 0
+        }
       },
       {
         id: '3',
@@ -59,6 +78,10 @@ const CampaignDetails = () => {
         amount: '1.8 ETH',
         recipient: '0x3A1234567890ABCDEF0123456789ABCDEF012345',
         reason: 'Content creation and educational material development',
+        votes: {
+          approved: 0,
+          declined: 0
+        }
       },
     ],
   };
@@ -117,38 +140,115 @@ const CampaignDetails = () => {
 
             {/* Fund Usage History Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="card"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.3 }}
+  className="card"
+>
+  <div className="flex items-center gap-3 mb-6">
+    <ArrowUpRight className="w-6 h-6 text-primary-500" />
+    <h2 className="text-2xl font-bold">Fund Usage</h2>
+  </div>
+  <div className="space-y-4">
+    {campaign.fundUsageHistory.map((usage) => (
+      <div
+        key={usage.id}
+        className="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800/70 transition-colors"
+      >
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-4">
+            <div className="p-2 rounded-full bg-red-500/20 text-red-500">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="font-medium text-sm text-gray-300">{usage.recipient}</p>
+              <p className="text-xs text-gray-500">{usage.timestamp}</p>
+            </div>
+          </div>
+          <p className="font-semibold text-red-500">{usage.amount}</p>
+        </div>
+        <div className="pl-14 space-y-3">
+          <p className="text-sm text-gray-400">{usage.reason}</p>
+          
+          {/* Document Link */}
+          <div className="flex items-center gap-2 text-primary-400 hover:text-primary-300">
+            <File className="w-4 h-4" />
+            <a 
+              href={usage.documentUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-sm underline"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <ArrowUpRight className="w-6 h-6 text-primary-500" />
-                <h2 className="text-2xl font-bold">Fund Usage History</h2>
-              </div>
-              <div className="space-y-4">
-                {campaign.fundUsageHistory.map((usage) => (
-                  <div
-                    key={usage.id}
-                    className="p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800/70 transition-colors"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-4">
-                        <div className="p-2 rounded-full bg-red-500/20 text-red-500">
-                          <ArrowUpRight className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-sm text-gray-300">{usage.recipient}</p>
-                          <p className="text-xs text-gray-500">{usage.timestamp}</p>
-                        </div>
-                      </div>
-                      <p className="font-semibold text-red-500">{usage.amount}</p>
-                    </div>
-                    <p className="text-sm text-gray-400 mt-2 pl-14">{usage.reason}</p>
-                  </div>
-                ))}
-              </div>
+              View Supporting Document
+            </a>
+          </div>
+
+          {/* Voting Section */}
+          {!votingStatus[usage.id] ? (
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => {
+                  setVotingStatus(prev => ({
+                    ...prev,
+                    [usage.id]: 'approved'
+                  }));
+                }}
+                className="px-4 py-2 bg-green-600/20 text-green-500 rounded-lg hover:bg-green-600/30 transition-colors flex items-center gap-2"
+              >
+                <Check className="w-4 h-4" />
+                Approve
+              </button>
+              <button
+                onClick={() => {
+                  setVotingStatus(prev => ({
+                    ...prev,
+                    [usage.id]: 'declined'
+                  }));
+                }}
+                className="px-4 py-2 bg-red-600/20 text-red-500 rounded-lg hover:bg-red-600/30 transition-colors flex items-center gap-2"
+              >
+                <X className="w-4 h-4" />
+                Decline
+              </button>
+            </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className={`text-sm font-medium ${
+                votingStatus[usage.id] === 'approved' 
+                  ? 'text-green-500' 
+                  : 'text-red-500'
+              }`}
+            >
+              {votingStatus[usage.id] === 'approved' 
+                ? 'Fund withdrawal has been approved' 
+                : 'Fund withdrawal has been declined'}
             </motion.div>
+          )}
+
+          {/* Voting Progress */}
+          {usage.votes && (
+            <div className="mt-2">
+              <div className="flex justify-between text-xs text-gray-400 mb-1">
+                <span>Approval Progress</span>
+                <span>{Math.round((usage.votes.approved / (usage.votes.approved + usage.votes.declined || 1)) * 100)}%</span>
+              </div>
+              <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-green-500 transition-all duration-300"
+                  style={{
+                    width: `${(usage.votes.approved / (usage.votes.approved + usage.votes.declined || 1)) * 100}%`
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</motion.div>
           </div>
         </div>
 
