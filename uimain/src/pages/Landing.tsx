@@ -110,7 +110,7 @@ function Landing() {
                 <div className="flex justify-between items-center">
                   <div className="space-y-2">
                     <h3 className="text-2xl font-bold">Active Projects</h3>
-                    <p className="text-4xl font-bold text-purple-400">2,547</p>
+                    <p className="text-4xl font-bold text-purple-400">10+</p>
                   </div>
                   <Users className="w-12 h-12 text-purple-400" />
                 </div>

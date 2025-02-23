@@ -32,12 +32,12 @@ const Sidebar = () => {
             Campaigns
           </NavLink>
 
-          <NavLink to={`/transactions/:${account?.address}`} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <NavLink to={`/transactions/${account?.address}`} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <History className="w-5 h-5" />
             Transaction History
           </NavLink>
 
-          <NavLink to={`/my-campaigns/:${account?.address}`} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <NavLink to={`/my-campaigns/${account?.address}`} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <Megaphone className="w-5 h-5" />
             My Campaigns
           </NavLink>

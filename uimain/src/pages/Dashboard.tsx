@@ -36,12 +36,12 @@ const Dashboard = () => {
   //   },
   // ];
 
-  // const categories = [
-  //   { value: 'all', label: 'All Projects' },
-  //   { value: 'education', label: 'Education' },
-  //   { value: 'environment', label: 'Environment' },
-  //   { value: 'social', label: 'Social Impact' }
-  // ];
+  const categories = [
+    { value: 'all', label: 'All Projects' },
+    { value: 'education', label: 'Education' },
+    { value: 'environment', label: 'Environment' },
+    { value: 'social', label: 'Social Impact' }
+  ];
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
@@ -61,6 +61,8 @@ const Dashboard = () => {
     params: []
   });
 
+
+
   return (
     <div>
       <motion.div
@@ -75,7 +77,7 @@ const Dashboard = () => {
         </div>
       </motion.div>
 
-      {/* <div className="mb-6 flex gap-3 overflow-x-auto pb-2">
+      <div className="mb-6 flex gap-3 overflow-x-auto pb-2">
         {categories.map((category) => (
           <button
             key={category.value}
@@ -89,7 +91,7 @@ const Dashboard = () => {
             {category.label}
           </button>
         ))}
-      </div> */}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {!isLoadingCampaigns && campaigns && (
