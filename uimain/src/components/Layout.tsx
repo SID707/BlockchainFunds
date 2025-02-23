@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
+import ChatBot from './chatbot';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         transition={{ duration: 0.5 }}
       >
         {children}
+        {!isLandingPage && <ChatBot />}
       </motion.main>
     </div>
   );
