@@ -37,7 +37,7 @@ const Sidebar = () => {
             Transaction History
           </NavLink>
 
-          <NavLink to="/my-campaigns" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <NavLink to={`/my-campaigns/:${account?.address}`} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <Megaphone className="w-5 h-5" />
             My Campaigns
           </NavLink>

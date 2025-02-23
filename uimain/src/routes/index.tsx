@@ -13,7 +13,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Landing />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/transactions/:walletAddress" element={<TransactionHistory />} />
-      <Route path="/my-campaigns/:walletAddress" element={<MyCampaigns />} />
+      <Route path="/my-campaigns/:campaignAddress" element={<MyCampaigns />} />
       <Route path="/rewards" element={<Rewards />} />
       <Route path="/campaign/:campaignAddress" element={<CampaignDetails />} />
     </Routes>

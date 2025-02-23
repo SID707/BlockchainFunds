@@ -560,21 +560,41 @@ const CampaignDetails = () => {
               </div>
             </div>
 
+            {/* Hide Funding Options when Status is Successful */}
+    {status !== 1 && (
+        <div className="items-center bg-gray-900 p-4 rounded-lg shadow-md">
+            <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount"
+                className="w-full mb-5 px-4 py-2 bg-gray-800 text-white border border-purple-500 rounded-l-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                min="0"
+            />
             <TransactionButton
-              transaction={() =>
-                prepareContractCall({
-                  contract: contract,
-                  method: "function fundCustomAmount(uint256 tokensToRedeem) payable",
-                  params: [BigInt(0)],
-                  value: BigInt(amount),
-                })
-              }
-              onError={(error: { message: any; }) => alert(`Error: ${error.message}`)}
-              onTransactionConfirmed={() => alert("Funded successfully!")}
-              className="w-full btn-primary mt-6"
+                transaction={() =>
+                    prepareContractCall({
+                        contract: contract,
+                        method: "function fundCustomAmount(uint256 tokensToRedeem) payable",
+                        params: [BigInt(0)],
+                        value: BigInt(amount),
+                    })
+                }
+                onError={(error) => alert(`Error: ${error.message}`)}
+                onTransactionConfirmed={() => alert("Funded successfully!")}
+                style={{
+                    marginLeft: "10px",
+                    backgroundColor: "#9333ea", // Purple
+                    color: "white",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "0.375rem",
+                    cursor: "pointer",
+                }}
             >
-              Fund
+                Fund
             </TransactionButton>
+        </div>
+    )}
           </div>
 
           <div className="card">
