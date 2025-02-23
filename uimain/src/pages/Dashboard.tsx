@@ -1,46 +1,65 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import CampaignCard from '../components/CampaignCard';
+import { getContract } from 'thirdweb';
+import { client } from '../client';
+import { baseSepolia } from 'thirdweb/chains';
+import { CROWDFUNDING_FACTORY } from '../constants/contracts';
+import { useReadContract } from 'thirdweb/react';
 
 const Dashboard = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const campaigns = [
-    {
-      id: '1',
-      title: 'Decentralized Education Platform',
-      description: 'Building a blockchain-based platform for accessible education worldwide',
-      goal: 100,
-      raised: 65,
-      image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80',
-    },
-    {
-      id: '2',
-      title: 'Green Energy Blockchain Initiative',
-      description: 'Implementing blockchain solutions for renewable energy tracking',
-      goal: 200,
-      raised: 120,
-      image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&q=80',
-    },
-    {
-      id: '3',
-      title: 'DeFi for Social Impact',
-      description: 'Creating financial instruments for social good using blockchain',
-      goal: 150,
-      raised: 89,
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80',
-    },
-  ];
+  // const campaigns = [
+  //   {
+  //     id: '1',
+  //     title: 'Decentralized Education Platform',
+  //     description: 'Building a blockchain-based platform for accessible education worldwide',
+  //     goal: 100,
+  //     raised: 65,
+  //     image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80',
+  //   },
+  //   {
+  //     id: '2',
+  //     title: 'Green Energy Blockchain Initiative',
+  //     description: 'Implementing blockchain solutions for renewable energy tracking',
+  //     goal: 200,
+  //     raised: 120,
+  //     image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&q=80',
+  //   },
+  //   {
+  //     id: '3',
+  //     title: 'DeFi for Social Impact',
+  //     description: 'Creating financial instruments for social good using blockchain',
+  //     goal: 150,
+  //     raised: 89,
+  //     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80',
+  //   },
+  // ];
 
-  const categories = [
-    { value: 'all', label: 'All Projects' },
-    { value: 'education', label: 'Education' },
-    { value: 'environment', label: 'Environment' },
-    { value: 'social', label: 'Social Impact' }
-  ];
+  // const categories = [
+  //   { value: 'all', label: 'All Projects' },
+  //   { value: 'education', label: 'Education' },
+  //   { value: 'environment', label: 'Environment' },
+  //   { value: 'social', label: 'Social Impact' }
+  // ];
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
   };
+
+  // Get CrowdfundingFactory contract
+  const contract = getContract({
+    client: client,
+    chain: baseSepolia,
+    address: CROWDFUNDING_FACTORY,
+  });
+
+  // Get all campaigns deployed with CrowdfundingFactory
+  const {data: campaigns, isLoading: isLoadingCampaigns, refetch: refetchCampaigns } = useReadContract({
+    contract: contract,
+    method: "function getAllCampaigns() view returns ((address campaignAddress, address owner, string name)[])",
+    params: []
+  });
 
   return (
     <div>
@@ -56,7 +75,7 @@ const Dashboard = () => {
         </div>
       </motion.div>
 
-      <div className="mb-6 flex gap-3 overflow-x-auto pb-2">
+      {/* <div className="mb-6 flex gap-3 overflow-x-auto pb-2">
         {categories.map((category) => (
           <button
             key={category.value}
@@ -70,15 +89,21 @@ const Dashboard = () => {
             {category.label}
           </button>
         ))}
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {campaigns.map((campaign, index) => (
-          <CampaignCard
-            key={campaign.id}
-            {...campaign}
-          />
-        ))}
+      {!isLoadingCampaigns && campaigns && (
+            campaigns.length > 0 ? (
+              campaigns.map((campaign) => (
+                <CampaignCard
+                  key={campaign.campaignAddress}
+                  campaignAddress={campaign.campaignAddress}
+                />
+              ))
+            ) : (
+              <p>No Campaigns</p>
+            )
+          )}
       </div>
     </div>
   );

@@ -12,10 +12,10 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/transactions" element={<TransactionHistory />} />
-      <Route path="/my-campaigns" element={<MyCampaigns />} />
+      <Route path="/transactions/:walletAddress" element={<TransactionHistory />} />
+      <Route path="/my-campaigns/:walletAddress" element={<MyCampaigns />} />
       <Route path="/rewards" element={<Rewards />} />
-      <Route path="/campaign/:id" element={<CampaignDetails />} />
+      <Route path="/campaign/:campaignAddress" element={<CampaignDetails />} />
     </Routes>
   );
 };
