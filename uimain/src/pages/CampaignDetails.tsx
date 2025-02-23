@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Users, Calendar, Target, Wallet, Clock, ArrowUpRight, ArrowDownRight, Pencil } from 'lucide-react';
+import { Users, Calendar, Target, Wallet, ArrowUpRight, ArrowDownRight, Pencil } from 'lucide-react';
 import { File, Check, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -302,7 +302,7 @@ const CampaignDetails = () => {
             </div>
 
             <button className="w-full btn-primary mt-6">
-              Back this Project
+              Fund Now
             </button>
           </div>
 

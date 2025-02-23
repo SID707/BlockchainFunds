@@ -36,10 +36,13 @@ const Dashboard = () => {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-8 flex justify-between items-center"
       >
-        <h1 className="text-3xl font-bold mb-2">Welcome to CryptoFund</h1>
-        <p className="text-gray-400">Discover and support innovative blockchain projects</p>
+        <div>
+          <h1 className="text-3xl font-bold mb-2">Welcome to CryptoFund</h1>
+          <p className="text-gray-400">Discover and support innovative blockchain projects</p>
+        </div>
+        <button className="bg-purple-500 text-white px-4 py-2 rounded">Connect Wallet</button>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
