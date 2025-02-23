@@ -25,11 +25,10 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
 
   return (
     <motion.div
-      className="card"
       whileHover={{ scale: 1.02 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-    >
+      className="card bg-gray-800 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_15px_30px_-5px_rgba(168,85,247,0.6)] hover:shadow-pink-500/70"    >
       <img
         src={image}
         alt={title}

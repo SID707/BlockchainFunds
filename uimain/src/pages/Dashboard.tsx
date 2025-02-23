@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import CampaignCard from '../components/CampaignCard';
 
 const Dashboard = () => {
-  // Mock data - replace with actual API calls
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const campaigns = [
     {
       id: '1',
@@ -31,12 +31,24 @@ const Dashboard = () => {
     },
   ];
 
+  const categories = [
+    { value: 'all', label: 'All Projects' },
+    { value: 'education', label: 'Education' },
+    { value: 'environment', label: 'Environment' },
+    { value: 'social', label: 'Social Impact' }
+  ];
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(event.target.value);
+  };
+
   return (
     <div>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="mb-8 flex justify-between items-center"
+      
       >
         <div>
           <h1 className="text-3xl font-bold mb-2">Welcome to CryptoFund</h1>
@@ -44,6 +56,22 @@ const Dashboard = () => {
         </div>
         <button className="bg-purple-500 text-white px-4 py-2 rounded">Connect Wallet</button>
       </motion.div>
+
+      <div className="mb-6 flex gap-3 overflow-x-auto pb-2">
+        {categories.map((category) => (
+          <button
+            key={category.value}
+            onClick={() => setSelectedCategory(category.value)}
+            className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
+              selectedCategory === category.value
+                ? 'bg-purple-500 text-white'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+            }`}
+          >
+            {category.label}
+          </button>
+        ))}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {campaigns.map((campaign, index) => (
