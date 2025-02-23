@@ -25,7 +25,7 @@ const Sidebar = () => {
       <nav className="space-y-2">
         <NavLink to="/dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <LayoutDashboard className="w-5 h-5" />
-          Dashboard
+          Campaigns
         </NavLink>
         
         <NavLink to="/transactions" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
