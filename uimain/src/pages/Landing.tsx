@@ -29,36 +29,36 @@ function Landing() {
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.8 }
+    transition: { duration: 2 }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br pt-1 from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
       {/* Hero Section */}
-      <div className="relative container mx-auto px-6 lg:px-8 pt-8 lg:pt-12">
+      <div className="relative container mx-auto px-6 lg:px-8">
       <nav className="flex justify-between items-center py-6">
           <motion.div 
             className="flex items-center space-x-2"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 1.4 }}
           >
             <Coins className="w-8 h-8 text-purple-400" />
             <span className="text-2xl font-bold">CryptoFund</span>
           </motion.div>
-          <motion.div 
-            className="flex space-x-8"
+            <motion.div 
+            className="flex space-x-8 items-center"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+            transition={{ duration: 1.6 }}
+            >
             <a href="#" className="hover:text-purple-400 transition-colors">How it Works</a>
             <a href="#" className="hover:text-purple-400 transition-colors">Projects</a>
             <a href="#" className="hover:text-purple-400 transition-colors">About</a>
             <button className="bg-purple-500 hover:bg-purple-600 px-6 py-2 rounded-full transition-colors shine">
-              Launch App
+              Connect Wallet
             </button>
-          </motion.div>
+            </motion.div>
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16">
@@ -77,11 +77,11 @@ function Landing() {
             </motion.p>
             <motion.div 
               {...fadeInUp}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.6 }}
               className="flex space-x-4"
             >
               <button className="bg-purple-500 hover:bg-purple-600 px-8 py-3 rounded-full flex items-center space-x-2 transition-all transform hover:scale-105 shine">
-                <span>Start Project</span>
+                <span>Connect Wallet</span>
                 <ChevronRight className="w-5 h-5" />
               </button>
               <button className="border border-purple-500 hover:bg-purple-500/10 px-8 py-3 rounded-full transition-all transform hover:scale-105">
@@ -124,7 +124,7 @@ function Landing() {
                         className="h-full bg-purple-400 rounded-full"
                         initial={{ width: "0%" }}
                         animate={{ width: "85%" }}
-                        transition={{ duration: 1, delay: 0.5 }}
+                        transition={{ duration: 1.8, delay: 0.7 }}
                       />
                     </div>
                   </motion.div>
@@ -142,7 +142,7 @@ function Landing() {
                         className="h-full bg-purple-400 rounded-full"
                         initial={{ width: "0%" }}
                         animate={{ width: "62%" }}
-                        transition={{ duration: 1, delay: 0.7 }}
+                        transition={{ duration: 2, delay: 0.9 }}
                       />
                     </div>
                   </motion.div>
@@ -188,7 +188,7 @@ function Landing() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 1.9 }}
         className="text-center mb-12 lg:mb-16"
       >
           <h2 className="text-4xl font-bold mb-4">Why Choose CryptoFund?</h2>
@@ -217,7 +217,7 @@ function Landing() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.9, delay: index * 0.3 }}
               whileHover={{ scale: 1.05 }}
               className="bg-white/5 p-8 rounded-2xl border border-white/10 text-center gradient-border"
             >
@@ -243,7 +243,7 @@ function Landing() {
               whileHover={{ scale: 1.05 }}
               className="bg-purple-500 hover:bg-purple-600 px-8 py-3 rounded-full inline-flex items-center space-x-2 shine"
             >
-              <span>Launch Your Project</span>
+              <span>Connect Your Wallet</span>
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>
